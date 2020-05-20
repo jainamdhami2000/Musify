@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% block body %}
+<main class="content">
+	<div class="single">
+
+		<section class="trailer">
+			<h3>Music Cover</h3>
+			<div class="trailer_frame">
+				<iframe width="560" height="315" src="{{object.music_video}}" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</section>
+
+		<section class="movie">
+			<img src="{{object.image.url}}">
+			<ul>
+				<li>{{object}}</li>
+				<li>{{object.description}}</li>
+				<li><a href="{% url 'music:music_category' '{{object.category}}' %}">{{object.category.title}}</a>
+				<li><a href="">Added {{object.year_of_release}}</a></li>
+				<li><a href="">By {{object.singer}}</a></li>
+				<li><a href="">Original Work of {{object.og_singer}}</a></li>
+				<li>{{object.popularity_count}} Views</li>
+			</ul>
+		</section>
+		<section class="links">
+			<h3>Links</h3>
+			<ul class="dlinks">
+				{% for link in links %}
+				<li><a href="{{link.link}}">Download</a></li>
+				{% endfor %}
+			</ul>
+			<ul class="wlinks">
+				{% for link in links %}
+				<li><a href="{{link.link}}">Watch</a></li>
+				{% endfor %}
+			</ul>
+		</section>
+
+		<section class="related">
+			<h3>Related Music</h3>
+			{% for music in related_music %}
+			<div class="relatemovie">
+				<a href="{% url 'music:music_detail' music.slug %}"><img src="{{music.image.url}}"></a>
+				<a href="{% url 'music:music_detail' music.slug %}"><span class="relatedname">{{music.title}}</span></a>
+			</div>
+			{% endfor %}
+		</section>
+
+	</div>
+</main>
+{% endblock body %}

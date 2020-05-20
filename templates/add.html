@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+<main class="content">
+	<section class="centered">
+		<h3>Add Music</h3>
+		<div class="contact">
+			<form id="myForm" action="mailto:jainamdhami2000@gmail.com" method="POST" enctype="text/plain" style="color:white;">
+				{% csrf_token %}
+				{{ form.as_p }}
+				{{ form1.as_p }}
+				<br>
+				<p>• Attach your cover image while composing your mail.</p>
+				<p>• Upload image with the size of 200px by 200px only.</p>
+				<p>• Applications without cover image won't be considered.</p>
+				<br>
+				<input type="submit" name="submit" value="SEND">
+			</form>
+		</div>
+	</section>
+
+</main>
+
+{% endblock body %}

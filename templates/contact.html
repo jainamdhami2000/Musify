@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+		<main class="content">
+			<section class="centered">
+				<h3>Contact</h3>
+				<div class="contact">
+					<form id="myForm" action="mailto:jainamdhami2000@gmail.com" method="POST" enctype="text/plain">
+						<label for="name">Name:</label>
+						<input type="text" name="name" id="name">
+
+						<label for="email">Email:</label>
+						<input type="email" name="email" id="email">
+
+						<label for="message">Message:</label>
+						<textarea id="message" name="message"></textarea>
+
+						<input type="submit" name="submit" value="SEND">
+					</form>
+
+					<!-- <span class="success">Message sent succesfully</span>
+					<span class="error">Failed sending message</span> -->
+				</div>
+		</section>
+
+	</main>
+
+	{% endblock body %}

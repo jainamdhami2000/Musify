@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Musify</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+	<!-- Link Swiper's CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@500&display=swap" rel="stylesheet">
+	<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+	<!-- Demo styles -->
+	<style>
+		article,
+		aside,
+		figure,
+		footer,
+		header,
+		hgroup,
+		menu,
+		nav,
+		section {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	{% if messages %}
+	{% for message in messages %}
+	<div id="hideMe" class="alert alert-{{ message.tags }}">
+		{{message}}
+	</div>
+	{% endfor %}
+	{% endif %}
+	<div class="wrapper">
+		<header class="header">
+			<figure class="logo"><a href="{% url 'home' %}"><img src="{% static 'img/logo12.png' %}" alt="Logo"></figure></a>
+			<!-- 41*224 -->
+			<nav class="menu">
+				<ul>
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a>Genres</a>
+						<ul>
+							<li><a href="{% url 'music:music_category' 'pop' %}">Pop</a></li>
+							<li><a href="{% url 'music:music_category' 'electronic' %}">Electronic</a></li>
+							<li><a href="{% url 'music:music_category' 'bollywood_romantic' %}">Bollywod Romantic</a></li>
+							<li><a href="{% url 'music:music_category' 'bollywood_singles' %}">Bollywood Singles</a></li>
+							<li><a href="{% url 'music:music_category' 'country' %}">Country</a></li>
+							<li><a href="{% url 'music:music_category' 'animated' %}">Animated Music Video</a></li>
+						</ul>
+					</li>
+					<li><a>Year</a>
+						<ul>
+							<li><a href="{% url 'music:music_year' year=2020 %}">2020</a></li>
+							<li><a href="{% url 'music:music_year' year=2019 %}">2019</a></li>
+							<li><a href="{% url 'music:music_year' year=2018 %}">2018</a></li>
+							<li><a href="{% url 'music:music_year' year=2017 %}">2017</a></li>
+							<li><a href="{% url 'music:music_year' year=2016 %}">2016</a></li>
+						</ul>
+					</li>
+					<li><a>Language</a>
+						<ul>
+							<li><a href="{% url 'music:music_language' 'english' %}">English</a></li>
+							<li><a href="{% url 'music:music_language' 'hindi' %}">Hindi</a></li>
+							<li><a href="{% url 'music:music_language' 'japanese' %}">Japanese</a></li>
+						</ul>
+					</li>
+					<li class="mobsearch">
+						<form class="mobform" method="GET">
+							<input type="text" name="query" value="{{ request.GET.q }}" class="mobsearchfield" placeholder="Search...">
+							<input type="submit" value="" class="mobsearchsubmit">
+						</form>
+					</li>
+					<li><a href="{% url 'about_us' %}">About Us</a></li>
+					<form class="search" method="GET" action="{% url 'music:music_search' %}">
+						<input type="text" name="query" value="{{ request.GET.q }}" class="searchfield" placeholder="Search...">
+						<input type="submit" value="" class="searchsubmit">
+					</form>
+					{% if user.is_authenticated %}
+					<li style="position: relative; left: 210px; color:white;"><a href="{% url 'profile' %}">Welcome, {{ user.username.title }} !</a></li>
+					<li style="position: relative; left: 230px; color:white;"><a href="{% url 'logout' %}">Logout</a></li>
+					{% if user.is_superuser %}
+					<li style="position: relative; left:250px; color:white;"><a href="{% url 'add_admin' %}">Add Music</a></li>
+					{% else %}
+					<li style="position: relative; left:250px; color:white;"><a href="{% url 'add' %}">Add Your Cover</a></li>
+					{% endif %}
+					{% else %}
+					<li style="position: relative; left: 400px; color:white;"><a href="{% url 'login' %}">Login</a></li>
+					<li style="position: relative; left: 420px; color:white;"><a href="{% url 'register' %}">Register</a></li>
+					{% endif %}
+
+
+
+
+					<div class="toggle"><img src="{% static 'img/menu.svg' %}"></div>
+				</ul>
+			</nav>
+		</header>
+		<!-- Swiper -->
+		<div class="homeslider">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<img src="{% static 'images/slider/poster2.jpg' %}">
+						<div class="caption">
+							<div class="captioninside">
+								<h3 style="font-family: 'Lemon', cursive;">"Music can change the world because it can change people."</h3>
+								<p style="font-family: 'Lemonada', cursive;">-Bono</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<img src="{% static 'images/slider/poster1.jpg' %}">
+						<div class="caption">
+							<div class="captioninside">
+								<h3 style="font-family: 'Lemon', cursive;">"Music and rhythm find their way into the secret places of the soul"</h3>
+								<p style="font-family: 'Lemonada', cursive;">-Plato</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<img src="{% static 'images/slider/poster3.jpg' %}">
+						<div class="caption">
+							<div class="captioninside">
+								<h3 style="font-family: 'Lemon', cursive;">"People haven’t always been there for me but music always has"</h3>
+								<p style="font-family: 'Lemonada', cursive;">-Taylor Swift</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<img src="{% static 'images/slider/poster4.jpg' %}">
+						<div class="caption">
+							<div class="captioninside">
+								<strong></strong>
+								<h3 style="font-family: 'Lemon', cursive;">"Music is the divine way to tell beautiful, poetic things to the heart."</h3>
+								<p style="font-family: 'Lemonada', cursive;">-Pablo Casals</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+
+
+		{% block body %}
+		{% endblock body %}
+
+		<footer class="footer">
+			<div class="copyright">
+				<p>Copyright &copy 2020 Musify</p>
+			</div>
+			<div class="footermenu">
+				<ul>
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'contact' %}">Contact</a></li>
+					<li><a href="{% url 'terms' %}">Terms and conditions</a></li>
+				</ul>
+			</div>
+			<div class="tags">
+				<ul>
+					<li>Watch Free Music Covers</li>
+					<li>Music Cover</li>
+					<li>Latest Music Covers</li>
+					<li>New Music Covers</li>
+				</ul>
+			</div>
+
+		</footer>
+		<!-- Swiper JS -->
+		<script src="{% static 'js/swiper.min.js' %}"></script>
+		<!-- Initialize Swiper -->
+		<script>
+			$(document).ready(function() {
+				var swiper = new Swiper('.homeslider > .swiper-container', {
+					autoplay: 5000,
+					speed: 2000,
+					pagination: '.swiper-pagination',
+					paginationClickable: true,
+					preventClicks: false,
+					preventClicksPropagation: false,
+					effect: 'fade',
+					breakpoints: {
+						320: {
+							height: 200
+						},
+
+						480: {
+							height: 300
+						},
+
+						768: {
+							height: 400
+						},
+						1024: {
+							height: 500
+						}
+					}
+				});
+
+				var recentswiper = new Swiper('.recentslider > .swiper-container', {
+					nextButton: '.recent-next',
+					prevButton: '.recent-prev',
+					slidesPerView: 8,
+					paginationClickable: true,
+					preventClicks: false,
+					preventClicksPropagation: false,
+					spaceBetween: 10,
+					breakpoints: {
+						320: {
+							slidesPerView: 3,
+							spaceBetween: 5
+						},
+
+						480: {
+							slidesPerView: 3,
+							spaceBetween: 5
+						},
+
+						768: {
+							slidesPerView: 5,
+							spaceBetween: 5
+						},
+						1024: {
+							slidesPerView: 6,
+							spaceBetween: 10
+						}
+					}
+				});
+
+				var mostswiper = new Swiper('.mostslider > .swiper-container', {
+					nextButton: '.most-next',
+					prevButton: '.most-prev',
+					slidesPerView: 8,
+					paginationClickable: true,
+					preventClicks: false,
+					preventClicksPropagation: false,
+					spaceBetween: 10,
+					breakpoints: {
+						320: {
+							slidesPerView: 3,
+							spaceBetween: 5
+						},
+
+						480: {
+							slidesPerView: 3,
+							spaceBetween: 5
+						},
+
+						768: {
+							slidesPerView: 5,
+							spaceBetween: 5
+						},
+						1024: {
+							slidesPerView: 6,
+							spaceBetween: 10
+						}
+					}
+				});
+
+				var topswiper = new Swiper('.topslider > .swiper-container', {
+					nextButton: '.top-next',
+					prevButton: '.top-prev',
+					slidesPerView: 8,
+					paginationClickable: true,
+					preventClicks: false,
+					preventClicksPropagation: false,
+					spaceBetween: 10,
+					breakpoints: {
+						320: {
+							slidesPerView: 3,
+							spaceBetween: 5
+						},
+
+						480: {
+							slidesPerView: 3,
+							spaceBetween: 5
+						},
+
+						768: {
+							slidesPerView: 5,
+							spaceBetween: 5
+						},
+						1024: {
+							slidesPerView: 6,
+							spaceBetween: 10
+						}
+					}
+				});
+
+			});
+		</script>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+<main class="content">
+  <section class="panel">
+    <h2>Recently Added</h2>
+    <div class="recentslider">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {% for music in recent_releases %}
+          <div class="swiper-slide"><a href="{% url 'music:music_detail' music.slug %}"><img src="{{music.image.url}}">
+              <h3 class="hometitle">{{music.title}} <br>{{music.year_of_release}}</h3>
+            </a></div>
+          {% endfor %}
+
+
+          <div class="swiper-slide"><a href="{% url 'music:music_list' %}"><img src="{% static 'img/others1.png' %}"></a></div>
+        </div>
+        <div class="nextdirection recent-next" style="height: 9.7rem"><img src="{% static 'img/right-arrow.svg' %}"> </div>
+        <div class="leftdirection recent-prev"><img src="{% static 'img/left-arrow.svg' %}"> </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Most Watched</h2>
+    <div class="mostslider">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {% for music in most_popular %}
+          <div class="swiper-slide"><a href="{% url 'music:music_detail' music.slug %}"><img src="{{music.image.url}}">
+              <h3 class="hometitle">{{music.title}} <br>Views: {{music.popularity_count}}</h3>
+            </a></div>
+          {% endfor %}
+          <div class="swiper-slide"><a href="{% url 'music:music_list' %}"><img src="{% static 'img/others.png' %}"></a></div>
+        </div>
+        <div class="nextdirection most-next" style="height: 9.7rem"><img src="{% static 'img/right-arrow.svg' %}"> </div>
+        <div class="leftdirection most-prev"><img src="{% static 'img/left-arrow.svg' %}"> </div>
+        <!-- Add Pagination -->
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Top Rated</h2>
+    <div class="topslider">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {% for music in top_rated %}
+          <div class="swiper-slide"><a href="{% url 'music:music_detail' music.slug %}"><img src="{{music.image.url}}">
+              <h3 class="hometitle">{{music.title}} <br>Rating: {{music.rating}}/10 </h3>
+            </a></div>
+          {% endfor %}
+          <div class="swiper-slide"><a href="{% url 'music:music_list' %}"><img src="{% static 'img/others.png' %}"></a></div>
+        </div>
+        <div class="nextdirection top-next" style="height: 9.7rem"><img src="{% static 'img/right-arrow.svg' %}"> </div>
+        <div class="leftdirection top-prev"><img src="{% static 'img/left-arrow.svg' %}"> </div>
+        <!-- Add Pagination -->
+      </div>
+    </div>
+  </section>
+
+
+</main>
+{% endblock body %}
