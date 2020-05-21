@@ -1,1 +1,1 @@
-web: gunicorn musify2000.wsgi
+web: gunicorn musify.wsgi
