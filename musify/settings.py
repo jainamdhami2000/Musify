@@ -25,7 +25,7 @@ SECRET_KEY = '2a(eii%80lqr82+scig0knd))d-$@3^0qx4#$_2^oo6cu1_ggr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['musify2000.herokuapp.com']
+ALLOWED_HOSTS = ['musify2000.herokuapp.com' , 'localhost']
 
 
 # Application definition
